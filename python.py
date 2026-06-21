@@ -65,8 +65,6 @@ while True:
         Bonus = 0.0
         break
 
-#_, m_overtime = monthly_compute_pay(Hours, Rate, Maximum_hours)
-#_, w_overtime = weekly_compute_pay(Hours, Rate, Maximum_hours)
 
 print('---Employee Sumary---')
 print('Employee:', Name)
