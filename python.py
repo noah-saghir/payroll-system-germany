@@ -14,8 +14,28 @@ def monthly_compute_pay(hours, rate, Maximum_hours):
         return int(base_pay),0
     else:
         overtime_hours = (hours - Maximum_hours)
-        base_pay = (((hours - overtime_hours) * 4.33) * rate)
+        base_pay = ((Maximum_hours * 4.33) * rate)
         return int(base_pay), overtime_hours
+
+def get_rating():
+    while True:
+        try:
+            Rating = int(input('Enter Performance Rating (1-5): '))
+        except:
+            print('Error, please enter a number between 1 and 5')
+            continue
+        if Rating < 1 or Rating > 5:
+            print('please enter a number between 1 and 5')
+            continue
+        return Rating
+
+def calculate_bonus(Rating, Gross_pay):
+    if Rating == 5:
+        return  Gross_pay * 0.2
+    elif Rating == 4:
+        return Gross_pay * 0.1
+    else:
+        return  0.0
 
 
 print('---Welcom to the payroll System---')
@@ -46,24 +66,8 @@ elif calculation_method == '2':
     Gross_pay, overtime_hours = weekly_compute_pay(Hours, Rate, Maximum_hours)
 
 
-Bonus = 0
-while True:
-    try:
-        Rating = int(input('Enter Performance Rating (1-5): '))
-    except:
-        print('Error, please enter a number between 1 and 5')
-        continue
-    if  Rating < 1 or Rating > 5:
-        continue
-    elif Rating == 5:
-        Bonus = Gross_pay * 0.2
-        break
-    elif Rating == 4:
-        Bonus = Gross_pay * 0.1
-        break
-    else:
-        Bonus = 0.0
-        break
+rating = get_rating()
+bonus = calculate_bonus(rating, Gross_pay)
 
 
 print('---Employee Sumary---')
@@ -80,6 +84,6 @@ elif calculation_method == '2':
     print('The Bonus overtime Rate: ', (overtime_hours * (Rate * 1.5)))
     print('Gross Pay per Week:', Gross_pay)
 
-print('The Rating Bonus Rate:', int(Bonus))
+print('The Rating Bonus Rate:', int(bonus))
 
-print('Total Pay:', Gross_pay + int(Bonus))
+print('Total Pay:', Gross_pay + int(bonus))
